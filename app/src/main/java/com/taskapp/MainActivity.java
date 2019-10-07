@@ -16,7 +16,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
-import com.taskapp.onBoard.OnBoardActivity;
+import com.taskapp.onboard.OnBoardActivity;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -24,7 +24,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
-import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.taskapp.onBoard;
+package com.taskapp.onboard;
 
 import android.os.Bundle;
 

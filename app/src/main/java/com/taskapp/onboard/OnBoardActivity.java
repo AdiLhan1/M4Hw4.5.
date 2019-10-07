@@ -1,4 +1,4 @@
-package com.taskapp.onBoard;
+package com.taskapp.onboard;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
