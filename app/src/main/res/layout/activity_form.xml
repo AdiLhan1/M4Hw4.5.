@@ -12,18 +12,27 @@
         android:id="@+id/editTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+       style="@style/EditTextStyle"
         android:hint="Title" />
 
     <EditText
+        style="@style/EditTextStyle"
         android:id="@+id/editDesc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Desc" />
 
     <Button
+        android:id="@+id/button_form"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="onClick"
-        android:text="save" />
+        android:text="save"
+        android:background="@drawable/button2"
+        android:textColor="#162285"
+        android:textSize="30sp"
+        />
+
+
 
 </LinearLayout>

@@ -1,12 +1,17 @@
 package com.taskapp;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Database;
 
 import com.taskapp.interfaces.OnItemClickListener;
 
@@ -43,27 +48,53 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
 
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
 
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        SQLiteDatabase db;
+        Database saveDatabase;
+        String saveString;
         private TextView textTitle;
         private TextView textDesc;
+        private CheckBox checkBox;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             textTitle = itemView.findViewById(R.id.textTitle);
             textDesc = itemView.findViewById(R.id.textDesc);
+            checkBox = itemView.findViewById(R.id.view_checkbox);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     onItemClickListener.onItemClick(getAdapterPosition());
-
                 }
             });
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    onItemClickListener.onItemLongClick(getAdapterPosition());
+                    return true;
+                }
+            });
+             saveString="no";
+            if (checkBox != null){
+                checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                        if (compoundButton.isChecked()){
+                            saveString="true";
+                        }else {
+                            saveString="false";
+                            }
+                    }
+                });
+
+            }
         }
 
         public void bind(Task task) {
             textTitle.setText(task.getTitle());
             textDesc.setText(task.getDesc());
+//            checkBox.setChecked(task.isTrue());
 
         }
     }
