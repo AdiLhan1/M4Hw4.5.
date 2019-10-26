@@ -58,11 +58,9 @@ public class FormActivity extends AppCompatActivity implements View.OnClickListe
 //            task.setTrue(checked);
             App.getInstance().getDatabase().taskDao().update(task);
         } else {
-            task = new Task(title, desc);
-            App.getInstance().getDatabase().taskDao().insert(task);
-        }
-        Task task = new Task(title, desc);
+        task = new Task(title, desc);
         App.getInstance().getDatabase().taskDao().insert(task);
+        }
         Intent intent = new Intent();
         intent.putExtra("task", task);
         setResult(RESULT_OK, intent);

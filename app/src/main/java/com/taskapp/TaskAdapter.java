@@ -1,5 +1,6 @@
 package com.taskapp;
 
+import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,7 +58,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
         private TextView textDesc;
         private CheckBox checkBox;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull final View itemView) {
             super(itemView);
             textTitle = itemView.findViewById(R.id.textTitle);
             textDesc = itemView.findViewById(R.id.textDesc);
@@ -75,27 +76,21 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
                     return true;
                 }
             });
-             saveString="no";
-            if (checkBox != null){
-                checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                        if (compoundButton.isChecked()){
-                            saveString="true";
-                        }else {
-                            saveString="false";
-                            }
-                    }
-                });
-
-            }
         }
 
-        public void bind(Task task) {
+        public void bind(final Task task) {
+
+            boolean isChecked = App.getInstance().getSharedPreferences("name_of_your_shared_pref", Context.MODE_PRIVATE).getBoolean(String.valueOf(task.getId()), false);
             textTitle.setText(task.getTitle());
             textDesc.setText(task.getDesc());
-//            checkBox.setChecked(task.isTrue());
+            checkBox.setChecked(isChecked);
+            checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    App.getInstance().getSharedPreferences("name_of_your_shared_pref", Context.MODE_PRIVATE).edit().putBoolean(String.valueOf(task.getId()), checkBox.isChecked()).apply();
+                }
 
+            });
         }
     }
 }

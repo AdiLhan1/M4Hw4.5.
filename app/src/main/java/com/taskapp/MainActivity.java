@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         SharedPreferences preferences = getSharedPreferences("settings", MODE_PRIVATE);
         boolean isShown = preferences.getBoolean("isShown", false);
         if (!isShown) {
@@ -56,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
             finish();
             return;
         }
+        setContentView(R.layout.activity_main);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-     private  boolean sort;
+     private  boolean sort= true;
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {

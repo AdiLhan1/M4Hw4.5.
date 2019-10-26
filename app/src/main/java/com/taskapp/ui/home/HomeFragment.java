@@ -28,6 +28,7 @@ import com.taskapp.R;
 import com.taskapp.Task;
 import com.taskapp.TaskAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Observer;
 
@@ -37,9 +38,8 @@ public class HomeFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private TaskAdapter adapter;
-    private List<Task> list;
+    private List<Task> list = new ArrayList<>();
     private int pos;
-    private CheckBox checkBox;
     String text;
     Task task;
     SharedPreferences myPrefs;
@@ -48,7 +48,6 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-        checkBox=root.findViewById(R.id.view_checkbox);
         recyclerView = root.findViewById(R.id.recyclerView);
         initList();
 //        if (checkBox.isChecked()){
@@ -101,23 +100,11 @@ public class HomeFragment extends Fragment {
             }
         });
     }
-    boolean check=true;
-    public void setCheckBox(){
-        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (check){
-                    myPrefs = getContext().getSharedPreferences(MY_SHARED_PREF, getContext().MODE_PRIVATE);
-                    myPrefsPrefsEditor = myPrefs.edit();
-                    myPrefsPrefsEditor.putBoolean("key",check);
-                    myPrefsPrefsEditor.commit();
-                }
-            }
-        });
-    }
+
     public void sortList(){
         list.clear();
         list.addAll(App.getInstance().getDatabase().taskDao().getAllsorted());
+        Log.e("----------", App.getInstance().getDatabase().taskDao().getAllsorted().size()+"");
         adapter.notifyDataSetChanged();
     }
     public void initialList(){
